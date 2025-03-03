@@ -68,7 +68,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.lab1/org.example.lab1.HelloApplication</mainClass>
+              <mainClass>org.example.lab1/_lab1.Lab1Application</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
