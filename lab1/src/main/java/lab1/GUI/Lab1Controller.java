@@ -4,11 +4,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import lab1.ciphers.Cipher;
+import lab1.ciphers.ColumnCipher;
+import lab1.ciphers.EmptyKeyException;
+import lab1.ciphers.VigenereCipher;
 import lab1.services.ErrorViewer;
 import lab1.services.FileSelector;
+import lab1.services.StringParser;
 
 import java.io.*;
 import java.net.URL;
+import java.security.InvalidParameterException;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -23,42 +29,39 @@ public class Lab1Controller implements Initializable {
     @FXML
     private ToggleGroup cipherSelector;
 
-    
-    Ciphers cipher = Ciphers.COLUMNS;
 
-    private boolean checkKey(String key) {
-        if (key.isEmpty()) {
-            ErrorViewer.showError("Ваш ключ не содержит корректных символов!");
-        }
-        return key.isEmpty();
-    }
-
-    private void fileNotFound() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Ошибка");
-        alert.setHeaderText("Ключ не содержит корректных символов!");
-        alert.setContentText("Пожалуйста, введите ключ в нужном поле");
-        alert.show();
-    }
+    Cipher cipher = new ColumnCipher();
 
     @FXML
     public void encodeButtonAction() {
-        String key = keyField.getText();
-        if (checkKey(key)) {
-            if (cipher == Ciphers.COLUMNS) {
-            }
+        try {
+            String encoded = cipher.encode(inputField.getText(), keyField.getText());
+            outputField.setText(encoded);
+        } catch (EmptyKeyException e) {
+            ErrorViewer.showError(e.getMessage());
         }
     }
+
+    @FXML
+    public void decodeButtonAction() {
+        try {
+            String decoded = cipher.decode(inputField.getText(), keyField.getText());
+            outputField.setText(decoded);
+        } catch (EmptyKeyException e) {
+            ErrorViewer.showError(e.getMessage());
+        }
+    }
+
 
     @FXML
     public void setCipher() {
         switch (cipherSelector.getSelectedToggle().getUserData().toString()) {
             case "columns": {
-                cipher = Ciphers.COLUMNS;
+                cipher = new ColumnCipher();
                 break;
             }
             case "vigenere": {
-                cipher = Ciphers.VIGENERE;
+                cipher = new VigenereCipher();
                 break;
             }
         };

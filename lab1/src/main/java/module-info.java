@@ -8,4 +8,6 @@ module org.example.lab1 {
     opens lab1.GUI to javafx.fxml;
     exports lab1;
     exports lab1.GUI;
+    exports lab1.ciphers;
+    opens lab1.ciphers to javafx.fxml;
 }

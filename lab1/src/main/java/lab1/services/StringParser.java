@@ -21,7 +21,7 @@ public abstract class StringParser {
         return sb.toString();
     }
 
-    public static String parseRussianLetter(String str) {
+    public static String parseRussianString(String str) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             if (isRussianLetter(str.charAt(i))) {
