@@ -12,6 +12,7 @@ public abstract class StringParser {
     }
 
     public static String parseEnglishString(String str) {
+        str = str.toUpperCase();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             if (isEnglishLetter(str.charAt(i))) {
@@ -22,6 +23,7 @@ public abstract class StringParser {
     }
 
     public static String parseRussianString(String str) {
+        str = str.toUpperCase();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             if (isRussianLetter(str.charAt(i))) {

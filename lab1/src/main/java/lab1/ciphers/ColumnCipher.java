@@ -4,7 +4,6 @@ import javafx.util.Pair;
 import lab1.services.StringParser;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ColumnCipher extends Cipher {
@@ -54,7 +53,6 @@ public class ColumnCipher extends Cipher {
     }
 
     public void initializeDecodingMatrix() {
-        //attlnxpies
         matrix = new ArrayList<>();
         int len = this.key.length();
         for (int i = 0; i < this.input.length(); i += len) {
