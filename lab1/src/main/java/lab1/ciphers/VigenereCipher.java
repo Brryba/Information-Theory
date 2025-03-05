@@ -9,8 +9,8 @@ public class VigenereCipher extends Cipher {
         final int LEN = this.input.length();
         StringBuilder stringBuilder = new StringBuilder(key);
 
-        for (int i = 1; stringBuilder.length() < this.input.length(); i++) {
-            for (int j = 0; j < key.length() && stringBuilder.length() < this.input.length(); j++) {
+        for (int i = 1; stringBuilder.length() < LEN; i++) {
+            for (int j = 0; j < key.length() && stringBuilder.length() < LEN; j++) {
                 stringBuilder.append(alphabet.getEncodedLetter(key.charAt(j), i, true));
             }
         }
@@ -21,10 +21,13 @@ public class VigenereCipher extends Cipher {
     @Override
     public String encode(String input, String key) throws EmptyKeyException {
         super.encode(StringParser.parseRussianString(input), StringParser.parseRussianString(key));
+        if (this.input.isEmpty()) {
+            return "";
+        }
         this.key = extendKeyToProg(this.key);
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < this.key.length(); i++) {
+        for (int i = 0; i < this.input.length(); i++) {
             stringBuilder.append(alphabet.getEncodedLetter(this.input.charAt(i),
                     alphabet.getLettersNum(this.key.charAt(i)), true));
         }
@@ -35,10 +38,13 @@ public class VigenereCipher extends Cipher {
     @Override
     public String decode(String input, String key) throws EmptyKeyException {
         super.encode(StringParser.parseRussianString(input), StringParser.parseRussianString(key));
+        if (this.input.isEmpty()) {
+            return "";
+        }
         this.key = extendKeyToProg(this.key);
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < this.key.length(); i++) {
+        for (int i = 0; i < this.input.length(); i++) {
             stringBuilder.append(alphabet.getEncodedLetter(this.input.charAt(i),
                     alphabet.getLettersNum(this.key.charAt(i)), false));
         }
