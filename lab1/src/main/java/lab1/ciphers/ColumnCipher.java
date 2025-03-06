@@ -61,10 +61,7 @@ public class ColumnCipher extends Cipher {
 
         int currChar = 0;
         for (int i = 0; i < len; i++) {
-            final int finalI = i;
-            int index = IntStream.range(0, colIndexes.size())
-                .filter(j -> colIndexes.get(j).getKey() == finalI)
-                .findFirst().getAsInt();
+            int index = colIndexes.get(i).getKey();
 
             for (int j = 0; j * len + index < this.input.length(); j++) {
                 matrix.get(j)[index] = this.input.charAt(currChar++);

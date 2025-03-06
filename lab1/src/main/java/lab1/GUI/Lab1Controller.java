@@ -10,11 +10,9 @@ import lab1.ciphers.EmptyKeyException;
 import lab1.ciphers.VigenereCipher;
 import lab1.services.ErrorViewer;
 import lab1.services.FileSelector;
-import lab1.services.StringParser;
 
 import java.io.*;
 import java.net.URL;
-import java.security.InvalidParameterException;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
